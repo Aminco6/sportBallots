@@ -2023,6 +2023,48 @@ Client Area
     </footer>
 
 
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device List</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .active { color: green; }
+        .inactive { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Device List</h1>
+    <ul id="device-list">Loading...</ul>
+
+    <script>
+        const API_URL = "http://127.0.0.1:8000/api/devices/";
+
+        fetch(API_URL)
+          .then(response => response.json())
+          .then(data => {
+              const list = document.getElementById("device-list");
+              list.innerHTML = "";
+              data.forEach(device => {
+                  let listItem = document.createElement("li");
+                  listItem.innerHTML = `<strong>${device.name}</strong> - Status: <span class="${device.status}">${device.status}</span>`;
+                  list.appendChild(listItem);
+              });
+          })
+          .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>
+
+
+	
+
+
     <!--********************************
 			Code End  Here 
 	******************************** -->
